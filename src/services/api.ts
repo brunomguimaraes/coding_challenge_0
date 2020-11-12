@@ -7,7 +7,7 @@ const fetchTransactions = () => {
   const secretKey = process.env.REACT_APP_FIDEL_API_SECRET_KEY;
 
   console.log('dotenv works?', process.env.REACT_APP_FIDEL_API_STAGE_URL);
-  const url = `${baseURL}/programs/${progId}/transactions?limit=10`;
+  const url = `${baseURL}/programs/${progId}/transactions`;
 
   const transactions = axios
     .get(url, {
@@ -17,7 +17,7 @@ const fetchTransactions = () => {
       },
     })
     .then((res) => {
-      return res.data;
+      return res.data.items;
     })
     .catch((error) => {
       console.log(JSON.stringify(error));

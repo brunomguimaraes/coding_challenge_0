@@ -1,12 +1,14 @@
 import React from 'react';
 import { Table } from 'antd';
 
-import 'antd/dist/antd.css';
 import currencyFormatter from '../../utils/formatters/currency';
 import dateFormatter from '../../utils/formatters/date';
 
+import 'antd/dist/antd.css';
+
 type ITransactionTable = {
   transactions: Transaction[];
+  isLoading: boolean;
 };
 
 export type Transaction = {
@@ -29,7 +31,7 @@ type PhysicalLocation = {
   id: string;
 };
 
-const TransactionsTable = ({ transactions }: ITransactionTable) => {
+const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
   const dataSource = transactions.map((transaction) => {
     const amount: string = currencyFormatter(transaction.amount, transaction.currency);
     const date = dateFormatter(transaction.datetime);
@@ -74,7 +76,7 @@ const TransactionsTable = ({ transactions }: ITransactionTable) => {
     },
   ];
 
-  return <Table columns={columns} dataSource={dataSource} />;
+  return <Table loading={isLoading} columns={columns} dataSource={dataSource} pagination={false} />;
 };
 
 export default TransactionsTable;

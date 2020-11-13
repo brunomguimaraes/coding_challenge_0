@@ -1,10 +1,6 @@
 import React from 'react';
-import { Table } from 'antd';
-
 import currencyFormatter from '../../utils/formatters/currency';
 import dateFormatter from '../../utils/formatters/date';
-
-import 'antd/dist/antd.css';
 
 type ITransactionTable = {
   transactions: Transaction[];
@@ -75,8 +71,8 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
       key: 'date',
     },
   ];
-
-  return <Table loading={isLoading} columns={columns} dataSource={dataSource} pagination={false} />;
+  console.log('old table stuff', isLoading, columns, dataSource);
+  return <div />;
 };
 
 export default TransactionsTable;

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'antd';
 import TransactionsTable, { Transaction } from '../../components/TransactionsTable';
 
 import fetchTransactions, { fetchNextTransactions, LastTransaction } from '../../services/api';
-
-import s from './styles.module.scss';
 
 const emptyLastTransaction = {
   id: '',
@@ -38,18 +35,18 @@ const Transactions = () => {
   };
 
   return (
-    <div className={s.wrapper}>
+    <div>
       <h2>Fidel API</h2>
       <TransactionsTable isLoading={isLoading} transactions={transactions} />
-      <div className={s.buttonWrapper}>
-        <Button
+      <div>
+        <button
           data-testid="show-more-button"
-          type="primary"
-          loading={isLoading}
+          type="button"
+          disabled={isLoading}
           onClick={() => handlePagination()}
         >
           Load More
-        </Button>
+        </button>
       </div>
     </div>
   );

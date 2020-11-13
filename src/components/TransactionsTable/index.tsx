@@ -10,27 +10,12 @@ type ITransactionTable = {
 };
 
 export type Transaction = {
-  accountId: string;
   amount: number;
-  brand: Brand;
   card: Card;
-  cleared: boolean;
-  created: string;
   currency: string;
   datetime: string;
   id: string;
-  identifiers: Identifier;
   location: PhysicalLocation;
-  programId: string;
-  updated: string;
-  wallet: string;
-};
-
-type Brand = {
-  id: string;
-  logoURL: string;
-  metadata: string;
-  name: string;
 };
 
 type Card = {
@@ -39,29 +24,9 @@ type Card = {
   scheme: string;
 };
 
-type Identifier = {
-  MID: string;
-  amexApprovalCode: string;
-  mastercardAuthCode: string;
-  mastercardRefNumber: string;
-  mastercardTransactionSequenceNumber: string;
-  visaAuthCode: string;
-};
-
 type PhysicalLocation = {
   address: string;
-  city: string;
-  countryCode: string;
-  geolocation: Geolocation;
   id: string;
-  metadata: string;
-  postcode: string;
-  timezone: string;
-};
-
-type Geolocation = {
-  latitude: number;
-  longitude: number;
 };
 
 const TransactionsTable = ({ transactions }: ITransactionTable) => {

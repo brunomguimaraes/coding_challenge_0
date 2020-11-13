@@ -6,6 +6,7 @@
 
 - ### Sass:
   Nested syntax and variables
+  (and personal prefence)
 
 - ### `.then()` and `.catch()`
   Just preference, Is the way I like to read Promises (and to avoid "Callback Hell").

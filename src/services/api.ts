@@ -6,7 +6,6 @@ const fetchTransactions = () => {
   const progId = process.env.REACT_APP_FIDEL_API_PROGRAM_ID;
   const secretKey = process.env.REACT_APP_FIDEL_API_SECRET_KEY;
 
-  console.log('dotenv works?', process.env.REACT_APP_FIDEL_API_STAGE_URL);
   const url = `${baseURL}/programs/${progId}/transactions`;
 
   const transactions = axios

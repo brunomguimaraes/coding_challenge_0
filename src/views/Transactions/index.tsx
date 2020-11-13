@@ -13,9 +13,11 @@ const emptyLastTransaction = {
 };
 
 const Transactions = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [lastTransaction, setLastTransaction] = useState<LastTransaction>(emptyLastTransaction);
+  const [isLoading, setLoading] = useState<boolean>(() => false);
+  const [transactions, setTransactions] = useState<Transaction[]>(() => []);
+  const [lastTransaction, setLastTransaction] = useState<LastTransaction>(
+    () => emptyLastTransaction
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -29,7 +31,7 @@ const Transactions = () => {
   const handlePagination = () => {
     setLoading(true);
     fetchNextTransactions(lastTransaction).then((res) => {
-      setTransactions([...transactions, ...res.data.items]);
+      setTransactions((oldTransactions) => [...oldTransactions, ...res.data.items]);
       setLastTransaction(res.data.last);
       setLoading(false);
     });

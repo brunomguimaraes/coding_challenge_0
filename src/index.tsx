@@ -5,11 +5,4 @@ import App from './views/App';
 
 import './index.css';
 
-require('dotenv').config();
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));

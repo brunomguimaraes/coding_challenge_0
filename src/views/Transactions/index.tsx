@@ -40,7 +40,12 @@ const Transactions = () => {
       <h2>Fidel API</h2>
       <TransactionsTable isLoading={isLoading} transactions={transactions} />
       <div className={s.buttonWrapper}>
-        <Button type="primary" loading={isLoading} onClick={() => handlePagination()}>
+        <Button
+          data-testid="show-more-button"
+          type="primary"
+          loading={isLoading}
+          onClick={() => handlePagination()}
+        >
           Load More
         </Button>
       </div>

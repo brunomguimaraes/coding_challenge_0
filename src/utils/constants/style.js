@@ -1,7 +1,4 @@
 const styleConstants = {
-  // spacing
-  spacer: '8px',
-
   // colors
   green: '#00A37D',
   warningColor: '#FDCA40',

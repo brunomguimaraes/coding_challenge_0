@@ -6,6 +6,7 @@ import {
   TableCell,
   TableHeader,
   TableRow,
+  LoadingWrapper,
 } from 'components/TransactionsTable/style';
 import Loading from 'components/Loading';
 
@@ -93,7 +94,11 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
           ))}
         </tbody>
       </Table>
-      {isLoading && <Loading title="fetching transactions" />}
+      {isLoading && (
+        <LoadingWrapper>
+          <Loading title="fetching transactions" />
+        </LoadingWrapper>
+      )}
     </TableBox>
   );
 };

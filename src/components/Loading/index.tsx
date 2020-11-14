@@ -7,17 +7,15 @@ type Props = {
 
 const Loading = ({ title }: Props) => {
   return (
-    <div>
-      <Wrapper>
-        <Circle />
-        <Circle />
-        <Circle />
-        <Shadow />
-        <Shadow />
-        <Shadow />
-        <Text>{title}</Text>
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <Circle />
+      <Circle />
+      <Circle />
+      <Shadow />
+      <Shadow />
+      <Shadow />
+      <Text>{title}</Text>
+    </Wrapper>
   );
 };
 

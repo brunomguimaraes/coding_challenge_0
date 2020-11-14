@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 import styleConstants from 'utils/constants/style';
 
-const { lightBlue, lightGray, green, black, spacer } = styleConstants;
+const { lightBlue, lightGray, green, black } = styleConstants;
 
 export const TableBox = styled.div`
-  margin: ${spacer} 0 ${spacer};
+  margin: 8px 0 8px;
   overflow-x: auto;
+`;
+
+export const LoadingWrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  padding-bottom: 480px;
 `;
 
 export const Table = styled.table`
@@ -27,7 +33,7 @@ export const TableRow = styled.tr`
 export const TableHeader = styled.th`
   text-transform: uppercase;
   text-align: left;
-  padding: ${spacer};
+  padding: 8px;
   white-space: nowrap;
   font-weight: lighter;
   text-align: center;
@@ -39,7 +45,7 @@ export const TableCell = styled.td`
   font-weight: ${(props) => (props.isBold ? 'bold' : 'normal')};
   border: 1px solid ${lightGray};
   text-align: left;
-  padding: ${spacer};
+  padding: 8px;
 
   @media (max-width: 300px) {
     font-size: 14px;

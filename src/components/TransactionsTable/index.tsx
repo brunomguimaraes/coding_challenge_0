@@ -90,9 +90,11 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
             <TableRow key={data.key}>
               <TableCell data-testid={`${data.key}-scheme-tid`}>{data.scheme}</TableCell>
               <TableCell data-testid={`${data.key}-number-tid`}>
-                {`•••• ${data.lastNumbers}`}
+                {`•••• •••• •••• ${data.lastNumbers}`}
               </TableCell>
-              <TableCell data-testid={`${data.key}-amount-tid`}>{data.amount}</TableCell>
+              <TableCell isCurrency isBold data-testid={`${data.key}-amount-tid`}>
+                {data.amount}
+              </TableCell>
               <TableCell data-testid={`${data.key}-address-tid`}>{data.address}</TableCell>
               <TableCell data-testid={`${data.key}-date-tid`}>{data.date}</TableCell>
             </TableRow>

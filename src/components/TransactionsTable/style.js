@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import styleConstants from 'utils/constants/style';
 
-const { lightBlue, spacer } = styleConstants;
+const { lightBlue, lightGray, green, black, spacer } = styleConstants;
 
 export const TableBox = styled.div`
   margin: ${spacer} 0 ${spacer};
@@ -15,13 +15,14 @@ export const Table = styled.table`
 `;
 
 export const TableRow = styled.tr`
+  font-family: 'Roboto', sans-serif;
   &:nth-child(even) {
     background-color: ${lightBlue};
   }
 `;
 
 export const TableHeader = styled.th`
-  border: 1px solid #dddddd;
+  border: 1px solid ${lightGray};
   text-align: left;
   padding: ${spacer};
   white-space: nowrap;
@@ -32,7 +33,9 @@ export const TableHeader = styled.th`
 `;
 
 export const TableCell = styled.td`
-  border: 1px solid #dddddd;
+  color: ${(props) => (props.isCurrency ? green : black)};
+  font-weight: ${(props) => (props.isBold ? 'bold' : 'normal')};
+  border: 1px solid ${lightGray};
   text-align: left;
   padding: ${spacer};
   @media (max-width: 300px) {

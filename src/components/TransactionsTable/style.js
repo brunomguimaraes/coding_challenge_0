@@ -8,14 +8,17 @@ export const TableBox = styled.div`
 `;
 
 export const Table = styled.table`
+  opacity: ${(props) => (props.isLoading ? '0.2' : '1')};
   border-collapse: collapse;
-  display: block;
+  margin: auto;
   overflow-x: auto;
   white-space: nowrap;
 `;
 
 export const TableRow = styled.tr`
   font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+
   &:nth-child(even) {
     background-color: ${lightBlue};
   }
@@ -28,18 +31,7 @@ export const TableHeader = styled.th`
   white-space: nowrap;
   font-weight: lighter;
   text-align: center;
-
-  @media (max-width: 750px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 425px) {
-    font-size: 12px;
-  }
-
-  @media (max-width: 300px) {
-    font-size: 10px;
-  }
+  font-size: 10px;
 `;
 
 export const TableCell = styled.td`
@@ -48,6 +40,7 @@ export const TableCell = styled.td`
   border: 1px solid ${lightGray};
   text-align: left;
   padding: ${spacer};
+
   @media (max-width: 300px) {
     font-size: 14px;
   }

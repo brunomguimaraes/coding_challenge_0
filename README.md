@@ -1,12 +1,10 @@
 # fidel-client
 
 ## Decisions:
-- ### AntDesign:
-  No particular reason, honestly. Since I could choose any tool for styling and I didn't want to lose much time with styling details, I went with AntDesign.
+- ### styled components:
 
-- ### Sass:
-  Nested syntax and variables
-  (and personal prefence)
+- ### create-react-app:
+
 
 - ### `.then()` and `.catch()`
   Just preference, Is the way I like to read Promises (and to avoid "Callback Hell").

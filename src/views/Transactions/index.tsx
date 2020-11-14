@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Transaction } from '../../components/TransactionsTable';
-// import TransactionsTable, { Transaction } from '../../components/TransactionsTable';
+import TransactionsTable, { Transaction } from '../../components/TransactionsTable';
 
 import fetchTransactions, { fetchNextTransactions, LastTransaction } from '../../services/api';
 
@@ -16,7 +15,7 @@ const Transactions = () => {
   const [lastTransaction, setLastTransaction] = useState<LastTransaction>(
     () => emptyLastTransaction
   );
-  console.log('transactions', transactions);
+
   useEffect(() => {
     setLoading(true);
     fetchTransactions().then((res) => {
@@ -38,7 +37,7 @@ const Transactions = () => {
   return (
     <div>
       <h2>Fidel API</h2>
-      {/* <TransactionsTable isLoading={isLoading} transactions={transactions} /> */}
+      <TransactionsTable isLoading={isLoading} transactions={transactions} />
       <div>
         <button
           data-testid="show-more-button"

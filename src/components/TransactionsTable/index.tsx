@@ -2,6 +2,8 @@ import React from 'react';
 import currencyFormatter from '../../utils/formatters/currency';
 import dateFormatter from '../../utils/formatters/date';
 
+import { Table, TableCell, TableHeader, TableRow } from './style';
+
 type ITransactionTable = {
   transactions: Transaction[];
   isLoading: boolean;
@@ -27,6 +29,29 @@ type PhysicalLocation = {
   id: string;
 };
 
+const columns = [
+  {
+    title: 'Scheme',
+    key: 'scheme',
+  },
+  {
+    title: 'Last Numbers',
+    key: 'lastNumbers',
+  },
+  {
+    title: 'Amount',
+    key: 'amount',
+  },
+  {
+    title: 'Adress',
+    key: 'address',
+  },
+  {
+    title: 'Date',
+    key: 'date',
+  },
+];
+
 const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
   const dataSource = transactions.map((transaction) => {
     const amount: string = currencyFormatter(transaction.amount, transaction.currency);
@@ -43,36 +68,31 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
     };
   });
 
-  const columns = [
-    {
-      title: 'Scheme',
-      dataIndex: 'scheme',
-      key: 'scheme',
-    },
-    {
-      title: 'Last Numbers',
-      dataIndex: 'lastNumbers',
-      key: 'lastNumbers',
-      render: (lastNumbers: string) => <span>{`**** **** **** ${lastNumbers}`}</span>,
-    },
-    {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
-    },
-    {
-      title: 'Adress',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
-    },
-  ];
-  console.log('old table stuff', isLoading, columns, dataSource);
-  return <div />;
+  return (
+    <>
+      {isLoading && <span>...Loading</span>}
+      <Table>
+        <thead>
+          <TableRow>
+            {columns.map((column) => (
+              <TableHeader key={column.key}>{column.title}</TableHeader>
+            ))}
+          </TableRow>
+        </thead>
+        <tbody>
+          {dataSource.map((data: any) => (
+            <TableRow key={data.key}>
+              <TableCell>{data.scheme}</TableCell>
+              <TableCell>{data.lastNumbers}</TableCell>
+              <TableCell>{data.amount}</TableCell>
+              <TableCell>{data.address}</TableCell>
+              <TableCell>{data.date}</TableCell>
+            </TableRow>
+          ))}
+        </tbody>
+      </Table>
+    </>
+  );
 };
 
 export default TransactionsTable;

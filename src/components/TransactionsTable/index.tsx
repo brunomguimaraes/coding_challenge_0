@@ -1,6 +1,6 @@
 import React from 'react';
-import currencyFormatter from '../../utils/formatters/currency';
-import dateFormatter from '../../utils/formatters/date';
+import currencyFormatter from 'utils/formatters/currency';
+import dateFormatter from 'utils/formatters/date';
 
 import { Table, TableCell, TableHeader, TableRow } from './style';
 

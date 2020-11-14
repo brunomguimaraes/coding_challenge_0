@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import TransactionsTable, { Transaction } from '../../components/TransactionsTable';
+import TransactionsTable, { Transaction } from 'components/TransactionsTable';
 
-import fetchTransactions, { fetchNextTransactions, LastTransaction } from '../../services/api';
+import fetchTransactions, { fetchNextTransactions, LastTransaction } from 'services/api';
 
 const emptyLastTransaction = {
   id: '',

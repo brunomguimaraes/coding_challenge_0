@@ -1,6 +1,4 @@
 import React from 'react';
-import currencyFormatter from 'utils/formatters/currency';
-import dateFormatter from 'utils/formatters/date';
 
 import {
   TableBox,
@@ -9,30 +7,25 @@ import {
   TableHeader,
   TableRow,
 } from 'components/TransactionsTable/style';
+import Loading from 'components/Loading';
+
+import { Transaction } from 'views/Transactions';
+
+import currencyFormatter from 'utils/formatters/currency';
+import dateFormatter from 'utils/formatters/date';
 
 type ITransactionTable = {
   transactions: Transaction[];
   isLoading: boolean;
 };
 
-export type Transaction = {
-  amount: number;
-  card: Card;
-  currency: string;
-  datetime: string;
-  id: string;
-  location: PhysicalLocation;
-};
-
-type Card = {
-  id: string;
-  lastNumbers: string;
+type TransactionDataSource = {
+  key: string;
   scheme: string;
-};
-
-type PhysicalLocation = {
+  lastNumbers: string;
+  amount: string;
   address: string;
-  id: string;
+  date: string;
 };
 
 const columns = [
@@ -76,8 +69,7 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
 
   return (
     <TableBox>
-      {isLoading && <span>...Loading</span>}
-      <Table>
+      <Table isLoading={isLoading}>
         <thead>
           <TableRow>
             {columns.map((column) => (
@@ -86,7 +78,7 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
           </TableRow>
         </thead>
         <tbody>
-          {dataSource.map((data: any) => (
+          {dataSource.map((data: TransactionDataSource) => (
             <TableRow key={data.key}>
               <TableCell data-testid={`${data.key}-scheme-tid`}>{data.scheme}</TableCell>
               <TableCell data-testid={`${data.key}-number-tid`}>
@@ -101,6 +93,7 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
           ))}
         </tbody>
       </Table>
+      {isLoading && <Loading title="fetching transactions" />}
     </TableBox>
   );
 };

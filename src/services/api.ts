@@ -39,7 +39,7 @@ export const fetchNextTransactions = (last: LastTransaction) => {
 };
 
 const fetchTransactions = () => {
-  const url = `${baseURL}/programs/${progId}/transactions?limit=20`;
+  const url = `${baseURL}/programs/${progId}/transactions?limit=50`;
 
   const transactions = instance
     .get(url)

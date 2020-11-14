@@ -1,39 +1,56 @@
 import styled from 'styled-components';
 import styleConstants from 'utils/constants/style';
 
-const { lightBlue } = styleConstants;
+const { lightBlue, lightGray, green, black, spacer } = styleConstants;
 
 export const TableBox = styled.div`
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+  margin: ${spacer} 0 ${spacer};
 `;
 
 export const Table = styled.table`
-  font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
 `;
 
 export const TableRow = styled.tr`
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+  font-family: 'Roboto', sans-serif;
   &:nth-child(even) {
     background-color: ${lightBlue};
   }
 `;
 
 export const TableHeader = styled.th`
-  border: 1px solid #dddddd;
+  text-transform: uppercase;
   text-align: left;
-  padding: 8px;
+  padding: ${spacer};
+  white-space: nowrap;
+  font-weight: lighter;
+  text-align: center;
+
+  @media (max-width: 750px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 12px;
+  }
+
+  @media (max-width: 300px) {
+    font-size: 10px;
+  }
 `;
 
 export const TableCell = styled.td`
-  border: 1px solid #dddddd;
+  color: ${(props) => (props.isCurrency ? green : black)};
+  font-weight: ${(props) => (props.isBold ? 'bold' : 'normal')};
+  border: 1px solid ${lightGray};
   text-align: left;
-  padding: 8px;
+  padding: ${spacer};
+  @media (max-width: 300px) {
+    font-size: 14px;
+  }
 `;
 
 export default TableBox;

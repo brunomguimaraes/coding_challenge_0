@@ -3,13 +3,14 @@ const styleConstants = {
   spacer: '8px',
 
   // colors
-  currencyColor: '#00FFC5',
+  green: '#00A37D',
   warningColor: '#FDCA40',
   errorColor: '#CD4B5B',
   black: '#070707',
   darkGray: '#2E3138',
+  lightGray: '#d3d3d3',
   blue: '#215DFF',
-  lightBlue: '#A7BBFF',
+  lightBlue: '#EBF0FF',
 };
 
 export default styleConstants;

@@ -27,6 +27,8 @@ type TransactionDataSource = {
   amount: string;
   address: string;
   date: string;
+  city: string;
+  postcode: string;
 };
 
 const columns = [
@@ -50,6 +52,14 @@ const columns = [
     title: 'Date',
     key: 'date',
   },
+  {
+    title: 'City',
+    key: 'city',
+  },
+  {
+    title: 'Postcode',
+    key: 'postcode',
+  },
 ];
 
 const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
@@ -65,6 +75,8 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
       amount,
       address: location.address,
       date,
+      city: location.city,
+      postcode: location.postcode,
     };
   });
 
@@ -90,6 +102,8 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
               </TableCell>
               <TableCell data-testid={`${data.key}-address-tid`}>{data.address}</TableCell>
               <TableCell data-testid={`${data.key}-date-tid`}>{data.date}</TableCell>
+              <TableCell data-testid={`${data.key}-city-tid`}>{data.city}</TableCell>
+              <TableCell data-testid={`${data.key}-postcode-tid`}>{data.postcode}</TableCell>
             </TableRow>
           ))}
         </tbody>

@@ -17,6 +17,8 @@ test('TransactionsTable render with two transactions', () => {
       location: {
         address: 'Elm Street, New Salvador',
         id: '3',
+        postcode: 'GGWP',
+        city: 'Wool City',
       },
     },
     {
@@ -32,6 +34,8 @@ test('TransactionsTable render with two transactions', () => {
       location: {
         address: 'Ohm Street, New California',
         id: '23',
+        postcode: 'GGWP',
+        city: 'Wool City',
       },
     },
   ];
@@ -41,16 +45,22 @@ test('TransactionsTable render with two transactions', () => {
   const amountRow = screen.getByTestId('4-amount-tid');
   const addressRow = screen.getByTestId('4-address-tid');
   const dateRow = screen.getByTestId('4-date-tid');
+  const postcodeRow = screen.getByTestId('4-postcode-tid');
+  const cityRow = screen.getByTestId('4-city-tid');
 
   expect(schemeRow).toBeInTheDocument();
   expect(cardNumberRow).toBeInTheDocument();
   expect(amountRow).toBeInTheDocument();
   expect(addressRow).toBeInTheDocument();
   expect(dateRow).toBeInTheDocument();
+  expect(postcodeRow).toBeInTheDocument();
+  expect(cityRow).toBeInTheDocument();
 
   expect(schemeRow).toHaveTextContent('visa');
   expect(cardNumberRow).toHaveTextContent('•••• •••• •••• 7777');
   expect(amountRow).toHaveTextContent('$990.21');
   expect(addressRow).toHaveTextContent('Ohm Street, New California');
   expect(dateRow).toHaveTextContent('2020-11-13');
+  expect(dateRow).toHaveTextContent('GGWP');
+  expect(dateRow).toHaveTextContent('Wool City');
 });

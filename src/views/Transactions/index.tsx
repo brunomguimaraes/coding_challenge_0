@@ -28,6 +28,8 @@ type Card = {
 type PhysicalLocation = {
   address: string;
   id: string;
+  city: string;
+  postcode: string;
 };
 
 const Transactions = () => {

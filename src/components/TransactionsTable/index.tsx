@@ -1,10 +1,8 @@
 import React from 'react';
-import { Table } from 'antd';
+import currencyFormatter from 'utils/formatters/currency';
+import dateFormatter from 'utils/formatters/date';
 
-import currencyFormatter from '../../utils/formatters/currency';
-import dateFormatter from '../../utils/formatters/date';
-
-import 'antd/dist/antd.css';
+import { Table, TableCell, TableHeader, TableRow } from './style';
 
 type ITransactionTable = {
   transactions: Transaction[];
@@ -31,6 +29,29 @@ type PhysicalLocation = {
   id: string;
 };
 
+const columns = [
+  {
+    title: 'Scheme',
+    key: 'scheme',
+  },
+  {
+    title: 'Last Numbers',
+    key: 'lastNumbers',
+  },
+  {
+    title: 'Amount',
+    key: 'amount',
+  },
+  {
+    title: 'Adress',
+    key: 'address',
+  },
+  {
+    title: 'Date',
+    key: 'date',
+  },
+];
+
 const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
   const dataSource = transactions.map((transaction) => {
     const amount: string = currencyFormatter(transaction.amount, transaction.currency);
@@ -47,36 +68,33 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
     };
   });
 
-  const columns = [
-    {
-      title: 'Scheme',
-      dataIndex: 'scheme',
-      key: 'scheme',
-    },
-    {
-      title: 'Last Numbers',
-      dataIndex: 'lastNumbers',
-      key: 'lastNumbers',
-      render: (lastNumbers: string) => <span>{`**** **** **** ${lastNumbers}`}</span>,
-    },
-    {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
-    },
-    {
-      title: 'Adress',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
-    },
-  ];
-
-  return <Table loading={isLoading} columns={columns} dataSource={dataSource} pagination={false} />;
+  return (
+    <>
+      {isLoading && <span>...Loading</span>}
+      <Table>
+        <thead>
+          <TableRow>
+            {columns.map((column) => (
+              <TableHeader key={column.key}>{column.title}</TableHeader>
+            ))}
+          </TableRow>
+        </thead>
+        <tbody>
+          {dataSource.map((data: any) => (
+            <TableRow key={data.key}>
+              <TableCell data-testid={`${data.key}-scheme-tid`}>{data.scheme}</TableCell>
+              <TableCell data-testid={`${data.key}-number-tid`}>
+                {`•••• ${data.lastNumbers}`}
+              </TableCell>
+              <TableCell data-testid={`${data.key}-amount-tid`}>{data.amount}</TableCell>
+              <TableCell data-testid={`${data.key}-address-tid`}>{data.address}</TableCell>
+              <TableCell data-testid={`${data.key}-date-tid`}>{data.date}</TableCell>
+            </TableRow>
+          ))}
+        </tbody>
+      </Table>
+    </>
+  );
 };
 
 export default TransactionsTable;

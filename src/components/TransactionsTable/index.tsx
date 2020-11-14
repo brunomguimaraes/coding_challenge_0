@@ -82,11 +82,13 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
         <tbody>
           {dataSource.map((data: any) => (
             <TableRow key={data.key}>
-              <TableCell>{data.scheme}</TableCell>
-              <TableCell>{data.lastNumbers}</TableCell>
-              <TableCell>{data.amount}</TableCell>
-              <TableCell>{data.address}</TableCell>
-              <TableCell>{data.date}</TableCell>
+              <TableCell data-testid={`${data.key}-scheme-tid`}>{data.scheme}</TableCell>
+              <TableCell data-testid={`${data.key}-number-tid`}>
+                {`**** **** **** ${data.lastNumbers}`}
+              </TableCell>
+              <TableCell data-testid={`${data.key}-amount-tid`}>{data.amount}</TableCell>
+              <TableCell data-testid={`${data.key}-address-tid`}>{data.address}</TableCell>
+              <TableCell data-testid={`${data.key}-date-tid`}>{data.date}</TableCell>
             </TableRow>
           ))}
         </tbody>

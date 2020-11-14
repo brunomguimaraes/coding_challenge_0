@@ -49,7 +49,7 @@ test('TransactionsTable render with two transactions', () => {
   expect(dateRow).toBeInTheDocument();
 
   expect(schemeRow).toHaveTextContent('visa');
-  expect(cardNumberRow).toHaveTextContent('•••• 7777');
+  expect(cardNumberRow).toHaveTextContent('•••• •••• •••• 7777');
   expect(amountRow).toHaveTextContent('$990.21');
   expect(addressRow).toHaveTextContent('Ohm Street, New California');
   expect(dateRow).toHaveTextContent('2020-11-13');

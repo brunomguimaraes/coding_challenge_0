@@ -2,7 +2,13 @@ import React from 'react';
 import currencyFormatter from 'utils/formatters/currency';
 import dateFormatter from 'utils/formatters/date';
 
-import { Table, TableCell, TableHeader, TableRow } from 'components/TransactionsTable/style';
+import {
+  TableBox,
+  Table,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from 'components/TransactionsTable/style';
 
 type ITransactionTable = {
   transactions: Transaction[];
@@ -69,7 +75,7 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
   });
 
   return (
-    <>
+    <TableBox>
       {isLoading && <span>...Loading</span>}
       <Table>
         <thead>
@@ -93,7 +99,7 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
           ))}
         </tbody>
       </Table>
-    </>
+    </TableBox>
   );
 };
 

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Main = styled.main`
-  width: 100%;
+  margin: 0 auto;
+  width: 96vw;
 `;
 
 export default Main;

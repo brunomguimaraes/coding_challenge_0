@@ -17,7 +17,6 @@ const headers = {
 
 const instance = axios.create({
   baseURL,
-  timeout: 2000,
   headers,
 });
 

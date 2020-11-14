@@ -1,24 +1,20 @@
 import styled from 'styled-components';
 import styleConstants from 'utils/constants/style';
 
-const { lightBlue } = styleConstants;
+const { lightBlue, spacer } = styleConstants;
 
 export const TableBox = styled.div`
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+  margin: ${spacer} 0 ${spacer};
 `;
 
 export const Table = styled.table`
-  font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
 `;
 
 export const TableRow = styled.tr`
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
   &:nth-child(even) {
     background-color: ${lightBlue};
   }
@@ -27,13 +23,21 @@ export const TableRow = styled.tr`
 export const TableHeader = styled.th`
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 8px;
+  padding: ${spacer};
+  white-space: nowrap;
+
+  @media (max-width: 300px) {
+    font-size: 14px;
+  }
 `;
 
 export const TableCell = styled.td`
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 8px;
+  padding: ${spacer};
+  @media (max-width: 300px) {
+    font-size: 12px;
+  }
 `;
 
 export default TableBox;

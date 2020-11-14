@@ -7,8 +7,6 @@ test('Transactions View elements are all present', () => {
   render(<Transactions />);
 
   const headerElement = screen.getByText(/Fidel API/i);
-  const showMoreButton = screen.getByTestId('show-more-button');
 
   expect(headerElement).toBeInTheDocument();
-  expect(showMoreButton).toBeInTheDocument();
 });

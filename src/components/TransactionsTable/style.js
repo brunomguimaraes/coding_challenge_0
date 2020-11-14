@@ -5,13 +5,13 @@ const { lightBlue, lightGray, green, black, spacer } = styleConstants;
 
 export const TableBox = styled.div`
   margin: ${spacer} 0 ${spacer};
+  overflow-x: auto;
 `;
 
 export const Table = styled.table`
   opacity: ${(props) => (props.isLoading ? '0.2' : '1')};
   border-collapse: collapse;
   margin: auto;
-  overflow-x: auto;
   white-space: nowrap;
 `;
 

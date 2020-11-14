@@ -22,13 +22,23 @@ export const TableRow = styled.tr`
 `;
 
 export const TableHeader = styled.th`
-  border: 1px solid ${lightGray};
+  text-transform: uppercase;
   text-align: left;
   padding: ${spacer};
   white-space: nowrap;
+  font-weight: lighter;
+  text-align: center;
+
+  @media (max-width: 750px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 12px;
+  }
 
   @media (max-width: 300px) {
-    font-size: 14px;
+    font-size: 10px;
   }
 `;
 
@@ -39,7 +49,7 @@ export const TableCell = styled.td`
   text-align: left;
   padding: ${spacer};
   @media (max-width: 300px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
 

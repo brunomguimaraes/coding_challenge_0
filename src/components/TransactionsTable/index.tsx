@@ -2,7 +2,7 @@ import React from 'react';
 import currencyFormatter from 'utils/formatters/currency';
 import dateFormatter from 'utils/formatters/date';
 
-import { Table, TableCell, TableHeader, TableRow } from './style';
+import { Table, TableCell, TableHeader, TableRow } from 'components/TransactionsTable/style';
 
 type ITransactionTable = {
   transactions: Transaction[];

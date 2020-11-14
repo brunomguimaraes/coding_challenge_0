@@ -36,4 +36,4 @@ export const TableCell = styled.td`
   padding: 8px;
 `;
 
-export default Table;
+export default TableBox;

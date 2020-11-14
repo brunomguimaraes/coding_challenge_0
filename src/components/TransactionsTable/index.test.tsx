@@ -61,6 +61,6 @@ test('TransactionsTable render with two transactions', () => {
   expect(amountRow).toHaveTextContent('$990.21');
   expect(addressRow).toHaveTextContent('Ohm Street, New California');
   expect(dateRow).toHaveTextContent('2020-11-13');
-  expect(dateRow).toHaveTextContent('GGWP');
-  expect(dateRow).toHaveTextContent('Wool City');
+  expect(postcodeRow).toHaveTextContent('GGWP');
+  expect(cityRow).toHaveTextContent('Wool City');
 });

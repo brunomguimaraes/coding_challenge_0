@@ -11,7 +11,7 @@ export const TableBox = styled.div`
 export const LoadingWrapper = styled.div`
   position: absolute;
   left: 50%;
-  padding-bottom: 480px;
+  padding-bottom: 160px;
 `;
 
 export const Table = styled.table`

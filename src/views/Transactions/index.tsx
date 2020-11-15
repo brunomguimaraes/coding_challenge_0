@@ -3,6 +3,7 @@ import TransactionsTable from 'components/TransactionsTable';
 import usePageBottom from 'utils/usePageBottom';
 
 import fetchTransactions, { fetchNextTransactions, LastTransaction } from 'services/api';
+import { Header } from './style';
 
 const emptyLastTransaction = {
   id: '',
@@ -66,7 +67,7 @@ const Transactions = () => {
 
   return (
     <div>
-      <h2>Fidel API</h2>
+      <Header>Fidel API</Header>
       <TransactionsTable
         data-testid="transactions-table"
         isLoading={isLoading}

@@ -31,7 +31,6 @@ export const fetchNextTransactions = (last: LastTransaction) => {
       return res;
     })
     .catch((error) => {
-      console.log(JSON.stringify(error));
       return error.message;
     });
 
@@ -47,7 +46,6 @@ const fetchTransactions = () => {
       return res;
     })
     .catch((error) => {
-      console.log(JSON.stringify(error));
       return error.message;
     });
 

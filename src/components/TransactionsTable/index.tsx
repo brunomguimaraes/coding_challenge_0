@@ -7,8 +7,10 @@ import {
   TableHeader,
   TableRow,
   LoadingWrapper,
+  Skeleton,
 } from 'components/TransactionsTable/style';
 import Loading from 'components/Loading';
+import PaymentIcon from 'components/PaymentIcon';
 
 import { Transaction } from 'views/Transactions';
 
@@ -93,7 +95,9 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
         <tbody>
           {dataSource.map((data: TransactionDataSource) => (
             <TableRow key={data.key}>
-              <TableCell data-testid={`${data.key}-scheme-tid`}>{data.scheme}</TableCell>
+              <TableCell data-testid={`${data.key}-scheme-tid`}>
+                <PaymentIcon cardName={data.scheme} />
+              </TableCell>
               <TableCell data-testid={`${data.key}-number-tid`}>
                 {`•••• •••• •••• ${data.lastNumbers}`}
               </TableCell>
@@ -108,6 +112,7 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
           ))}
         </tbody>
       </Table>
+      {isLoading && dataSource.length === 0 && <Skeleton />}
       {isLoading && (
         <LoadingWrapper>
           <Loading title="fetching transactions" />

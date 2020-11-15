@@ -29,7 +29,7 @@ test('TransactionsTable render with two transactions', () => {
         scheme: 'visa',
       },
       currency: 'USD',
-      datetime: 'Fri Nov 13 2020 05:32:00 GMT-0300 (WEST)',
+      datetime: 'Fri Nov 13 2020 05:32:00 GMT+0500 (WEST)',
       id: '4',
       location: {
         address: 'Ohm Street, New California',
@@ -60,7 +60,7 @@ test('TransactionsTable render with two transactions', () => {
   expect(cardNumberRow).toHaveTextContent('•••• •••• •••• 7777');
   expect(amountRow).toHaveTextContent('$990.21');
   expect(addressRow).toHaveTextContent('Ohm Street, New California');
-  expect(dateRow).toHaveTextContent('2020-11-13');
+  expect(dateRow).toHaveTextContent('11/12/2020, 7:32:00 PM, (GMT-5)');
   expect(postcodeRow).toHaveTextContent('GGWP');
   expect(cityRow).toHaveTextContent('Wool City');
 });

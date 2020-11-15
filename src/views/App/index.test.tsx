@@ -1,14 +1,12 @@
 // import React so you can use JSX (React.createElement) in your test
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Transactions from '.';
+import App from '.';
 
-test('Transactions View elements are all present', () => {
-  render(<Transactions />);
+test('App renders properly', () => {
+  render(<App />);
 
   const headerElement = screen.getByText(/Fidel API/i);
-  const tableHeaderElement = screen.getByText(/Amount/i);
 
   expect(headerElement).toBeInTheDocument();
-  expect(tableHeaderElement).toBeInTheDocument();
 });

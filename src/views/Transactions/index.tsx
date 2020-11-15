@@ -67,7 +67,11 @@ const Transactions = () => {
   return (
     <div>
       <h2>Fidel API</h2>
-      <TransactionsTable isLoading={isLoading} transactions={transactions} />
+      <TransactionsTable
+        data-testid="transactions-table"
+        isLoading={isLoading}
+        transactions={transactions}
+      />
     </div>
   );
 };

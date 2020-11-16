@@ -16,6 +16,7 @@ import dateFormatter from 'utils/formatters/date';
 
 type ITransactionTable = {
   transactions: Transaction[];
+  refference: any;
 };
 
 type TransactionDataSource = {
@@ -60,7 +61,7 @@ const columns = [
   },
 ];
 
-const TransactionsTable = ({ transactions }: ITransactionTable) => {
+const TransactionsTable = ({ transactions, refference }: ITransactionTable) => {
   const dataSource = transactions.map((transaction) => {
     const amount: string = currencyFormatter(transaction.amount, transaction.currency);
     const date = dateFormatter(transaction.datetime);
@@ -89,8 +90,8 @@ const TransactionsTable = ({ transactions }: ITransactionTable) => {
           </TableRow>
         </thead>
         <tbody>
-          {dataSource.map((data: TransactionDataSource) => (
-            <TableRow key={data.key}>
+          {dataSource.map((data: TransactionDataSource, index: number) => (
+            <TableRow ref={dataSource.length === index + 1 ? refference : null} key={data.key}>
               <TableCell data-testid={`${data.key}-scheme-tid`}>
                 <PaymentIcon cardName={data.scheme} />
               </TableCell>

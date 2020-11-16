@@ -40,6 +40,7 @@ type PhysicalLocation = {
 
 const Transactions = () => {
   const [isLoading, setLoading] = useState<boolean>(() => false);
+  const [errorMessage, setErrorMessage] = useState<string>(() => '');
   const [transactions, setTransactions] = useState<Transaction[]>(() => []);
   const [lastTransaction, setLastTransaction] = useState<LastTransaction>(
     () => emptyLastTransaction
@@ -49,11 +50,17 @@ const Transactions = () => {
 
   const handlePagination = () => {
     setLoading(true);
-    fetchNextTransactions({ lastTransaction, limit }).then((res) => {
-      setTransactions((oldTransactions) => [...oldTransactions, ...res.data.items]);
-      setLastTransaction(res.data.last);
-      setLoading(false);
-    });
+    fetchNextTransactions({ lastTransaction, limit })
+      .then((res) => {
+        setTransactions((oldTransactions) => [...oldTransactions, ...res.data.items]);
+        setLastTransaction(res.data.last);
+        setLoading(false);
+      })
+      .catch((error) => {
+        if (error) {
+          setErrorMessage('an error has occurred! Please contact technical support.');
+        }
+      });
   };
 
   useEffect(() => {
@@ -63,20 +70,24 @@ const Transactions = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetchTransactions({ limit }).then((res) => {
-      setTransactions(res.data.items);
-      setLastTransaction(res.data.last);
-      setLoading(false);
-    });
+    fetchTransactions({ limit })
+      .then((res) => {
+        setTransactions(res.data.items);
+        setLastTransaction(res.data.last);
+        setLoading(false);
+      })
+      .catch((error) => {
+        if (error) {
+          setErrorMessage('an error has occurred! Please contact technical support.');
+        }
+      });
   }, []);
 
   return (
     <div>
+      {errorMessage && <div>errorMessage</div>}
       <Header>Fidel API</Header>
-      <TransactionsTable
-        data-testid="transactions-table"
-        transactions={transactions}
-      />
+      <TransactionsTable data-testid="transactions-table" transactions={transactions} />
       {isLoading && <Skeleton quantity={Number(limit)} />}
     </div>
   );

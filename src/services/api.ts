@@ -1,6 +1,11 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 
+type ApiParams = {
+  lastTransaction?: LastTransaction;
+  limit: string;
+};
+
 export type LastTransaction = {
   id: string;
   programIdDel: string;
@@ -20,10 +25,10 @@ const instance = axios.create({
   headers,
 });
 
-export const fetchNextTransactions = (last: LastTransaction) => {
+export const fetchNextTransactions = ({ lastTransaction, limit }: ApiParams) => {
   const url = `${baseURL}/programs/${progId}/transactions?start=${encodeURIComponent(
-    JSON.stringify(last)
-  )}`;
+    JSON.stringify(lastTransaction)
+  )}&limit=${limit}`;
 
   const transactions = instance
     .get(url)
@@ -37,8 +42,8 @@ export const fetchNextTransactions = (last: LastTransaction) => {
   return transactions;
 };
 
-const fetchTransactions = () => {
-  const url = `${baseURL}/programs/${progId}/transactions?limit=50`;
+const fetchTransactions = ({ limit }: ApiParams) => {
+  const url = `${baseURL}/programs/${progId}/transactions?limit=${limit}`;
 
   const transactions = instance
     .get(url)

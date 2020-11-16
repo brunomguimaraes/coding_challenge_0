@@ -3,6 +3,8 @@ import TransactionsTable from 'components/TransactionsTable';
 import usePageBottom from 'utils/usePageBottom';
 
 import fetchTransactions, { fetchNextTransactions, LastTransaction } from 'services/api';
+import getRowsLimit from 'utils/viewHeight';
+
 import { Header } from './style';
 
 const emptyLastTransaction = {
@@ -39,17 +41,17 @@ const Transactions = () => {
   const [lastTransaction, setLastTransaction] = useState<LastTransaction>(
     () => emptyLastTransaction
   );
+  const isPageBottom = usePageBottom();
+  const limit = getRowsLimit();
 
   const handlePagination = () => {
     setLoading(true);
-    fetchNextTransactions(lastTransaction).then((res) => {
+    fetchNextTransactions({ lastTransaction, limit }).then((res) => {
       setTransactions((oldTransactions) => [...oldTransactions, ...res.data.items]);
       setLastTransaction(res.data.last);
       setLoading(false);
     });
   };
-
-  const isPageBottom = usePageBottom();
 
   useEffect(() => {
     if (!isPageBottom || !transactions || isLoading) return;
@@ -58,7 +60,7 @@ const Transactions = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetchTransactions().then((res) => {
+    fetchTransactions({ limit }).then((res) => {
       setTransactions(res.data.items);
       setLastTransaction(res.data.last);
       setLoading(false);

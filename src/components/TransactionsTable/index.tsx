@@ -6,10 +6,7 @@ import {
   TableCell,
   TableHeader,
   TableRow,
-  LoadingWrapper,
-  Skeleton,
 } from 'components/TransactionsTable/style';
-import Loading from 'components/Loading';
 import PaymentIcon from 'components/PaymentIcon';
 
 import { Transaction } from 'views/Transactions';
@@ -19,7 +16,6 @@ import dateFormatter from 'utils/formatters/date';
 
 type ITransactionTable = {
   transactions: Transaction[];
-  isLoading: boolean;
 };
 
 type TransactionDataSource = {
@@ -64,7 +60,7 @@ const columns = [
   },
 ];
 
-const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
+const TransactionsTable = ({ transactions }: ITransactionTable) => {
   const dataSource = transactions.map((transaction) => {
     const amount: string = currencyFormatter(transaction.amount, transaction.currency);
     const date = dateFormatter(transaction.datetime);
@@ -84,7 +80,7 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
 
   return (
     <TableBox>
-      <Table isLoading={isLoading}>
+      <Table>
         <thead>
           <TableRow>
             {columns.map((column) => (
@@ -112,12 +108,6 @@ const TransactionsTable = ({ transactions, isLoading }: ITransactionTable) => {
           ))}
         </tbody>
       </Table>
-      {isLoading && dataSource.length === 0 && <Skeleton />}
-      {isLoading && (
-        <LoadingWrapper>
-          <Loading title="fetching transactions" />
-        </LoadingWrapper>
-      )}
     </TableBox>
   );
 };

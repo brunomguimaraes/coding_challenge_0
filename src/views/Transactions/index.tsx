@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+
 import TransactionsTable from 'components/TransactionsTable';
+import Skeleton from 'components/Skeleton';
+
 import usePageBottom from 'utils/usePageBottom';
+import getRowsLimit from 'utils/viewHeight';
 
 import fetchTransactions, { fetchNextTransactions, LastTransaction } from 'services/api';
-import getRowsLimit from 'utils/viewHeight';
 
 import { Header } from './style';
 
@@ -72,9 +75,9 @@ const Transactions = () => {
       <Header>Fidel API</Header>
       <TransactionsTable
         data-testid="transactions-table"
-        isLoading={isLoading}
         transactions={transactions}
       />
+      {isLoading && <Skeleton quantity={Number(limit)} />}
     </div>
   );
 };

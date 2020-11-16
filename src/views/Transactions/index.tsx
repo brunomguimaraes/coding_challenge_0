@@ -8,7 +8,7 @@ import getRowsLimit from 'utils/viewHeight';
 
 import fetchTransactions, { fetchNextTransactions, LastTransaction } from 'services/api';
 
-import { Header } from './style';
+import { Header, Error } from './style';
 
 const emptyLastTransaction = {
   id: '',
@@ -85,7 +85,7 @@ const Transactions = () => {
 
   return (
     <div>
-      {errorMessage && <div>errorMessage</div>}
+      {errorMessage && <Error>{errorMessage}</Error>}
       <Header>Fidel API</Header>
       <TransactionsTable data-testid="transactions-table" transactions={transactions} />
       {isLoading && <Skeleton quantity={Number(limit)} />}

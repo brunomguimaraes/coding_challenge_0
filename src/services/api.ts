@@ -30,31 +30,13 @@ export const fetchNextTransactions = ({ lastTransaction, limit }: ApiParams) => 
     JSON.stringify(lastTransaction)
   )}&limit=${limit}`;
 
-  const transactions = instance
-    .get(url)
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      return error.message;
-    });
-
-  return transactions;
+  return instance.get(url);
 };
 
 const fetchTransactions = ({ limit }: ApiParams) => {
   const url = `${baseURL}/programs/${progId}/transactions?limit=${limit}`;
 
-  const transactions = instance
-    .get(url)
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      return error.message;
-    });
-
-  return transactions;
+  return instance.get(url);
 };
 
 export default fetchTransactions;

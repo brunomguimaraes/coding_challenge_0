@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   TableBox,
   Table,
@@ -11,6 +11,7 @@ import Skeleton from 'components/Skeleton';
 import { Transaction } from 'views/Transactions';
 import currencyFormatter from 'utils/formatters/currency';
 import dateFormatter from 'utils/formatters/date';
+import TransactionModal from 'components/TransactionModal';
 
 type ITransactionTable = {
   transactions: Transaction[];
@@ -19,7 +20,7 @@ type ITransactionTable = {
   limit: number;
 };
 
-type TransactionDataSource = {
+export type TransactionDataSource = {
   key: string;
   scheme: string;
   lastNumbers: string;
@@ -66,7 +67,20 @@ const columns = [
   },
 ];
 
+const emptyModalData = {
+  key: '',
+  scheme: '',
+  lastNumbers: '',
+  amount: '',
+  address: '',
+  date: '',
+  city: '',
+  postcode: '',
+};
+
 const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITransactionTable) => {
+  const [isModalShown, showModal] = useState<boolean>(() => false);
+  const [modalData, setModalData] = useState<TransactionDataSource>(() => emptyModalData);
   const dataSource = transactions.map((transaction) => {
     const amount: string = currencyFormatter(transaction.amount, transaction.currency);
     const date = dateFormatter(transaction.datetime);
@@ -84,8 +98,19 @@ const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITran
     };
   });
 
+  const handleShowModal = (data: TransactionDataSource) => {
+    showModal(true);
+    setModalData(data);
+  };
+
+  const handleCloseModal = () => {
+    showModal(false);
+    setModalData(emptyModalData);
+  };
+
   return (
     <TableBox>
+      <TransactionModal handleClose={handleCloseModal} data={modalData} show={isModalShown} />
       <Table>
         <thead>
           <TableRow>
@@ -121,7 +146,9 @@ const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITran
                 {data.postcode}
               </TableCell>
               <TableCell sizeXL>
-                <span>... </span>
+                <button type="button" onClick={() => handleShowModal(data)}>
+                  Lupa
+                </button>
               </TableCell>
             </TableRow>
           ))}

@@ -34,6 +34,7 @@ const columns = [
   {
     title: 'Scheme',
     key: 'scheme',
+    sizeM: true,
   },
   {
     title: 'Last Numbers',
@@ -46,18 +47,22 @@ const columns = [
   {
     title: 'Adress',
     key: 'address',
+    sizeL: true,
   },
   {
     title: 'Date',
     key: 'date',
+    sizeM: true,
   },
   {
     title: 'City',
     key: 'city',
+    sizeM: true,
   },
   {
     title: 'Postcode',
     key: 'postcode',
+    sizeL: true,
   },
 ];
 
@@ -85,26 +90,39 @@ const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITran
         <thead>
           <TableRow>
             {columns.map((column) => (
-              <TableHeader key={column.key}>{column.title}</TableHeader>
+              <TableHeader sizeL={column.sizeL} sizeM={column.sizeM} key={column.key}>
+                {column.title}
+              </TableHeader>
             ))}
           </TableRow>
         </thead>
         <tbody>
           {dataSource.map((data: TransactionDataSource, index: number) => (
             <TableRow ref={dataSource.length === index + 1 ? elementRef : null} key={data.key}>
-              <TableCell data-testid={`${data.key}-scheme-tid`}>
+              <TableCell sizeM data-testid={`${data.key}-scheme-tid`}>
                 <PaymentIcon cardName={data.scheme} />
               </TableCell>
               <TableCell data-testid={`${data.key}-number-tid`}>
-                {`•••• •••• •••• ${data.lastNumbers}`}
+                {`•••• ${data.lastNumbers}`}
               </TableCell>
               <TableCell isCurrency isBold data-testid={`${data.key}-amount-tid`}>
                 {data.amount}
               </TableCell>
-              <TableCell data-testid={`${data.key}-address-tid`}>{data.address}</TableCell>
-              <TableCell data-testid={`${data.key}-date-tid`}>{data.date}</TableCell>
-              <TableCell data-testid={`${data.key}-city-tid`}>{data.city}</TableCell>
-              <TableCell data-testid={`${data.key}-postcode-tid`}>{data.postcode}</TableCell>
+              <TableCell sizeL data-testid={`${data.key}-address-tid`}>
+                {data.address}
+              </TableCell>
+              <TableCell sizeM data-testid={`${data.key}-date-tid`}>
+                {data.date}
+              </TableCell>
+              <TableCell sizeM data-testid={`${data.key}-city-tid`}>
+                {data.city}
+              </TableCell>
+              <TableCell sizeL data-testid={`${data.key}-postcode-tid`}>
+                {data.postcode}
+              </TableCell>
+              <TableCell sizeXL>
+                <span>... </span>
+              </TableCell>
             </TableRow>
           ))}
         </tbody>

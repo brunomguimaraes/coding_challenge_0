@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import styleConstants from 'utils/constants/style';
 
-const { lightBlue, lightGray, green, black, darkGray } = styleConstants;
+const { lightBlue, lightGray, green, black } = styleConstants;
 
 export const TableBox = styled.div`
   margin: 8px 0 8px;
@@ -26,7 +26,6 @@ export const TableRow = styled.tr`
 `;
 
 export const TableHeader = styled.th`
-  border-bottom: 1px solid ${darkGray};
   text-transform: uppercase;
   text-align: left;
   padding: 8px;
@@ -34,6 +33,18 @@ export const TableHeader = styled.th`
   font-weight: lighter;
   text-align: center;
   font-size: 10px;
+
+  @media (max-width: 1024px) {
+    ${(props) => props.sizeL && 'display: none'};
+  }
+
+  @media (max-width: 725px) {
+    ${(props) => props.sizeM && 'display: none'};
+  }
+
+  @media (max-width: 414px) {
+    ${(props) => props.sizeSm && 'display: none'};
+  }
 `;
 
 export const TableCell = styled.td`
@@ -47,15 +58,34 @@ export const TableCell = styled.td`
     padding: 0 16px;
   }
 
+  &:nth-last-child(1) {
+    padding-right: 16px;
+    width: 16px;
+  }
+
   @media (max-width: 1024px) {
+    ${(props) => props.sizeL && 'display: none'};
+
     &:nth-child(1) {
       padding: 0 8px;
     }
   }
 
+  @media (max-width: 725px) {
+    ${(props) => props.sizeM && 'display: none'};
+  }
+
+  @media (max-width: 414px) {
+    ${(props) => props.sizeSm && 'display: none'};
+  }
+
   @media (max-width: 300px) {
     font-size: 14px;
   }
+`;
+
+export const Button = styled.span`
+  cursor: pointer;
 `;
 
 export default TableBox;

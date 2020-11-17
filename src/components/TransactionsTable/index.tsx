@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PaymentIcon from 'components/PaymentIcon';
+import Skeleton from 'components/Skeleton';
+import TransactionModal from 'components/TransactionModal';
+import { Transaction } from 'views/Transactions';
+import currencyFormatter from 'utils/formatters/currency';
+import dateFormatter from 'utils/formatters/date';
+import { ReactComponent as MagnifyLogo } from 'assets/svg/magnify.svg';
+
 import {
   TableBox,
   Table,
   TableCell,
   TableHeader,
   TableRow,
+  Button,
 } from 'components/TransactionsTable/style';
-import PaymentIcon from 'components/PaymentIcon';
-import Skeleton from 'components/Skeleton';
-import { Transaction } from 'views/Transactions';
-import currencyFormatter from 'utils/formatters/currency';
-import dateFormatter from 'utils/formatters/date';
 
 type ITransactionTable = {
   transactions: Transaction[];
@@ -19,7 +23,7 @@ type ITransactionTable = {
   limit: number;
 };
 
-type TransactionDataSource = {
+export type TransactionDataSource = {
   key: string;
   scheme: string;
   lastNumbers: string;
@@ -46,22 +50,39 @@ const columns = [
   {
     title: 'Adress',
     key: 'address',
+    sizeL: true,
   },
   {
     title: 'Date',
     key: 'date',
+    sizeM: true,
   },
   {
     title: 'City',
     key: 'city',
+    sizeM: true,
   },
   {
     title: 'Postcode',
     key: 'postcode',
+    sizeL: true,
   },
 ];
 
+const emptyModalData = {
+  key: '',
+  scheme: '',
+  lastNumbers: '',
+  amount: '',
+  address: '',
+  date: '',
+  city: '',
+  postcode: '',
+};
+
 const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITransactionTable) => {
+  const [isModalShown, showModal] = useState<boolean>(() => false);
+  const [modalData, setModalData] = useState<TransactionDataSource>(() => emptyModalData);
   const dataSource = transactions.map((transaction) => {
     const amount: string = currencyFormatter(transaction.amount, transaction.currency);
     const date = dateFormatter(transaction.datetime);
@@ -79,13 +100,26 @@ const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITran
     };
   });
 
+  const handleShowModal = (data: TransactionDataSource) => {
+    setModalData(data);
+    showModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalData(emptyModalData);
+    showModal(false);
+  };
+
   return (
     <TableBox>
+      <TransactionModal handleClose={handleCloseModal} data={modalData} show={isModalShown} />
       <Table>
         <thead>
           <TableRow>
             {columns.map((column) => (
-              <TableHeader key={column.key}>{column.title}</TableHeader>
+              <TableHeader sizeL={column.sizeL} sizeM={column.sizeM} key={column.key}>
+                {column.title}
+              </TableHeader>
             ))}
           </TableRow>
         </thead>
@@ -96,15 +130,33 @@ const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITran
                 <PaymentIcon cardName={data.scheme} />
               </TableCell>
               <TableCell data-testid={`${data.key}-number-tid`}>
-                {`•••• •••• •••• ${data.lastNumbers}`}
+                {`•••• ${data.lastNumbers}`}
               </TableCell>
               <TableCell isCurrency isBold data-testid={`${data.key}-amount-tid`}>
                 {data.amount}
               </TableCell>
-              <TableCell data-testid={`${data.key}-address-tid`}>{data.address}</TableCell>
-              <TableCell data-testid={`${data.key}-date-tid`}>{data.date}</TableCell>
-              <TableCell data-testid={`${data.key}-city-tid`}>{data.city}</TableCell>
-              <TableCell data-testid={`${data.key}-postcode-tid`}>{data.postcode}</TableCell>
+              <TableCell sizeL data-testid={`${data.key}-address-tid`}>
+                {data.address}
+              </TableCell>
+              <TableCell sizeM data-testid={`${data.key}-date-tid`}>
+                {data.date}
+              </TableCell>
+              <TableCell sizeM data-testid={`${data.key}-city-tid`}>
+                {data.city}
+              </TableCell>
+              <TableCell sizeL data-testid={`${data.key}-postcode-tid`}>
+                {data.postcode}
+              </TableCell>
+              <TableCell>
+                <Button
+                  tabIndex={index}
+                  role="button"
+                  onClick={() => handleShowModal(data)}
+                  onKeyDown={() => handleShowModal(data)}
+                >
+                  <MagnifyLogo />
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </tbody>

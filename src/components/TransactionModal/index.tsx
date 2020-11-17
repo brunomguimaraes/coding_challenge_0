@@ -1,6 +1,14 @@
 import React from 'react';
 import { TransactionDataSource } from 'components/TransactionsTable';
-import { Modal, ModalSection } from 'components/TransactionModal/style';
+import { ReactComponent as CloseX } from 'assets/svg/close.svg';
+import {
+  Modal,
+  ModalSection,
+  ModalButton,
+  ModalList,
+  ModalListItem,
+  ScrollBodyLock,
+} from 'components/TransactionModal/style';
 
 type ModalProps = {
   handleClose: () => void;
@@ -11,17 +19,46 @@ type ModalProps = {
 const TransactionModal = ({ handleClose, show, data }: ModalProps) => {
   return (
     <Modal showModal={show}>
+      <ScrollBodyLock showModal={show} />
       <ModalSection>
-        <button type="button" onClick={handleClose}>
-          close
-        </button>
-        <div>{data.key}</div>
-        <div>{data.scheme}</div>
-        <div>{data.lastNumbers}</div>
-        <div>{data.amount}</div>
-        <div>{data.address}</div>
-        <div>{data.postcode}</div>
-        <div>{data.city}</div>
+        <ModalButton
+          tabIndex={0}
+          role="button"
+          onClick={() => handleClose()}
+          onKeyDown={() => handleClose()}
+        >
+          <CloseX />
+        </ModalButton>
+        <ModalList>
+          <ModalListItem>
+            {'Id: '}
+            <span>{data.key}</span>
+          </ModalListItem>
+          <ModalListItem>
+            {'Scheme: '}
+            <span>{data.scheme}</span>
+          </ModalListItem>
+          <ModalListItem>
+            {'Last four numbers: '}
+            <span>{data.lastNumbers}</span>
+          </ModalListItem>
+          <ModalListItem>
+            {'Amount: '}
+            <span>{data.amount}</span>
+          </ModalListItem>
+          <ModalListItem>
+            {'Address: '}
+            <span>{data.address}</span>
+          </ModalListItem>
+          <ModalListItem>
+            {'City: '}
+            <span>{data.city}</span>
+          </ModalListItem>
+          <ModalListItem>
+            {'Postcode: '}
+            <span>{data.postcode}</span>
+          </ModalListItem>
+        </ModalList>
       </ModalSection>
     </Modal>
   );

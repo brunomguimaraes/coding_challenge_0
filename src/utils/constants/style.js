@@ -3,6 +3,7 @@ const styleConstants = {
   green: '#00A37D',
   errorColor: '#D7060E',
   black: '#070707',
+  darkGray: '#2E3138',
   lightGray: '#D3D3D3',
   blue: '#215DFF',
   lightBlue: '#EBF0FF',

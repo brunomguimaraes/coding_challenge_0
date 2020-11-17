@@ -101,13 +101,13 @@ const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITran
   });
 
   const handleShowModal = (data: TransactionDataSource) => {
-    showModal(true);
     setModalData(data);
+    showModal(true);
   };
 
   const handleCloseModal = () => {
-    showModal(false);
     setModalData(emptyModalData);
+    showModal(false);
   };
 
   return (

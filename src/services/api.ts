@@ -33,7 +33,7 @@ export const fetchNextTransactions = ({ lastTransaction, limit }: ApiParams) => 
   return instance.get(url);
 };
 
-const fetchTransactions = ({ limit }: ApiParams) => {
+export const fetchTransactions = ({ limit }: ApiParams) => {
   const url = `${baseURL}/programs/${progId}/transactions?limit=${limit}`;
 
   return instance.get(url);

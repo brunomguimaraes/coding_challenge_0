@@ -1,7 +1,7 @@
 // import React so you can use JSX (React.createElement) in your test
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from '.';
+import App from 'views/App';
 
 test('App renders properly', () => {
   render(<App />);

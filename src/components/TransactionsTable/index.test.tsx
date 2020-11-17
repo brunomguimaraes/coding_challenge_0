@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import TransactionsTable from '.';
+import TransactionsTable from 'components/TransactionsTable';
 
 test('TransactionsTable render with two transactions', () => {
   const transactions = [
@@ -39,7 +39,9 @@ test('TransactionsTable render with two transactions', () => {
       },
     },
   ];
-  render(<TransactionsTable transactions={transactions} isLoading={false} />);
+  render(
+    <TransactionsTable elementRef={null} limit={10} transactions={transactions} isLoading={false} />
+  );
   const schemeRow = screen.getByTestId('4-scheme-tid');
   const cardNumberRow = screen.getByTestId('4-number-tid');
   const amountRow = screen.getByTestId('4-amount-tid');

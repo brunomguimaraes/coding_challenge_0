@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 
 import TransactionsTable from 'components/TransactionsTable';
-import Skeleton from 'components/Skeleton';
 
 import getRowsLimit from 'utils/viewHeight';
 
-import fetchTransactions, { fetchNextTransactions, LastTransaction } from 'services/api';
+import { fetchTransactions, fetchNextTransactions, LastTransaction } from 'services/api';
 
 import { Header, Error } from './style';
 
@@ -102,10 +101,11 @@ const Transactions = () => {
       <Header>Fidel API</Header>
       <TransactionsTable
         data-testid="transactions-table"
-        refference={lastRowElementRef}
+        elementRef={lastRowElementRef}
         transactions={transactions}
+        isLoading={isLoading}
+        limit={Number(limit)}
       />
-      {isLoading && <Skeleton quantity={Number(limit)} />}
     </div>
   );
 };

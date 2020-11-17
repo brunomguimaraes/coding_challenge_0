@@ -5,13 +5,15 @@ const { lightBlue, lightGray, green, black, darkGray } = styleConstants;
 
 export const TableBox = styled.div`
   margin: 8px 0 8px;
-  overflow-x: auto;
+  height: 88vh;
+  overflow: scroll;
 `;
 
 export const Table = styled.table`
   border-collapse: collapse;
   margin: auto;
   white-space: nowrap;
+  overflow: auto;
   width: 100%;
 `;
 

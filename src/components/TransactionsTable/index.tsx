@@ -8,6 +8,7 @@ import {
   TableRow,
 } from 'components/TransactionsTable/style';
 import PaymentIcon from 'components/PaymentIcon';
+import Skeleton from 'components/Skeleton';
 
 import { Transaction } from 'views/Transactions';
 
@@ -16,7 +17,9 @@ import dateFormatter from 'utils/formatters/date';
 
 type ITransactionTable = {
   transactions: Transaction[];
-  refference: any;
+  elementRef: any;
+  isLoading: boolean;
+  limit: number;
 };
 
 type TransactionDataSource = {
@@ -61,7 +64,7 @@ const columns = [
   },
 ];
 
-const TransactionsTable = ({ transactions, refference }: ITransactionTable) => {
+const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITransactionTable) => {
   const dataSource = transactions.map((transaction) => {
     const amount: string = currencyFormatter(transaction.amount, transaction.currency);
     const date = dateFormatter(transaction.datetime);
@@ -91,7 +94,7 @@ const TransactionsTable = ({ transactions, refference }: ITransactionTable) => {
         </thead>
         <tbody>
           {dataSource.map((data: TransactionDataSource, index: number) => (
-            <TableRow ref={dataSource.length === index + 1 ? refference : null} key={data.key}>
+            <TableRow ref={dataSource.length === index + 1 ? elementRef : null} key={data.key}>
               <TableCell data-testid={`${data.key}-scheme-tid`}>
                 <PaymentIcon cardName={data.scheme} />
               </TableCell>
@@ -109,6 +112,7 @@ const TransactionsTable = ({ transactions, refference }: ITransactionTable) => {
           ))}
         </tbody>
       </Table>
+      {isLoading && <Skeleton quantity={limit} />}
     </TableBox>
   );
 };

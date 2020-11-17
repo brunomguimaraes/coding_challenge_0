@@ -9,7 +9,7 @@ const Skeleton = ({ quantity }: Props) => {
   return (
     <>
       {Array.from({ length: quantity }, (_: any, index: any) => (
-        <SkeletonRow key={index} />
+        <SkeletonRow data-testid={`${index}-skel-row`} key={index} />
       ))}
     </>
   );

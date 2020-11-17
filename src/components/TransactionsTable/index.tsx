@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import PaymentIcon from 'components/PaymentIcon';
+import Skeleton from 'components/Skeleton';
+import TransactionModal from 'components/TransactionModal';
+import { Transaction } from 'views/Transactions';
+import currencyFormatter from 'utils/formatters/currency';
+import dateFormatter from 'utils/formatters/date';
+import { ReactComponent as MagnifyLogo } from 'assets/svg/magnify.svg';
+
 import {
   TableBox,
   Table,
   TableCell,
   TableHeader,
   TableRow,
+  Button,
 } from 'components/TransactionsTable/style';
-import PaymentIcon from 'components/PaymentIcon';
-import Skeleton from 'components/Skeleton';
-import { Transaction } from 'views/Transactions';
-import currencyFormatter from 'utils/formatters/currency';
-import dateFormatter from 'utils/formatters/date';
-import TransactionModal from 'components/TransactionModal';
 
 type ITransactionTable = {
   transactions: Transaction[];
@@ -35,7 +38,6 @@ const columns = [
   {
     title: 'Scheme',
     key: 'scheme',
-    sizeM: true,
   },
   {
     title: 'Last Numbers',
@@ -124,7 +126,7 @@ const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITran
         <tbody>
           {dataSource.map((data: TransactionDataSource, index: number) => (
             <TableRow ref={dataSource.length === index + 1 ? elementRef : null} key={data.key}>
-              <TableCell sizeM data-testid={`${data.key}-scheme-tid`}>
+              <TableCell data-testid={`${data.key}-scheme-tid`}>
                 <PaymentIcon cardName={data.scheme} />
               </TableCell>
               <TableCell data-testid={`${data.key}-number-tid`}>
@@ -145,10 +147,15 @@ const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITran
               <TableCell sizeL data-testid={`${data.key}-postcode-tid`}>
                 {data.postcode}
               </TableCell>
-              <TableCell sizeXL>
-                <button type="button" onClick={() => handleShowModal(data)}>
-                  Lupa
-                </button>
+              <TableCell>
+                <Button
+                  tabIndex={index}
+                  role="button"
+                  onClick={() => handleShowModal(data)}
+                  onKeyDown={() => handleShowModal(data)}
+                >
+                  <MagnifyLogo />
+                </Button>
               </TableCell>
             </TableRow>
           ))}

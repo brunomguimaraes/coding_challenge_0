@@ -58,8 +58,14 @@ export const TableCell = styled.td`
     padding: 0 16px;
   }
 
+  &:nth-last-child(1) {
+    padding-right: 16px;
+    width: 16px;
+  }
+
   @media (max-width: 1024px) {
     ${(props) => props.sizeL && 'display: none'};
+
     &:nth-child(1) {
       padding: 0 8px;
     }
@@ -76,6 +82,10 @@ export const TableCell = styled.td`
   @media (max-width: 300px) {
     font-size: 14px;
   }
+`;
+
+export const Button = styled.span`
+  cursor: pointer;
 `;
 
 export default TableBox;

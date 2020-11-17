@@ -8,9 +8,7 @@ describe('Transactions View', () => {
     render(<Transactions />);
 
     const headerElement = screen.getByText(/Fidel API/i);
-    const tableHeaderElement = screen.getByText(/Amount/i);
 
     expect(headerElement).toBeInTheDocument();
-    expect(tableHeaderElement).toBeInTheDocument();
   });
 });

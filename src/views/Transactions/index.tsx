@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-
 import TransactionsTable from 'components/TransactionsTable';
-
 import getRowsLimit from 'utils/viewHeight';
-
 import { fetchTransactions, fetchNextTransactions, LastTransaction } from 'services/api';
 
 import { Header, Error } from './style';

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   TableBox,
   Table,
@@ -9,9 +8,7 @@ import {
 } from 'components/TransactionsTable/style';
 import PaymentIcon from 'components/PaymentIcon';
 import Skeleton from 'components/Skeleton';
-
 import { Transaction } from 'views/Transactions';
-
 import currencyFormatter from 'utils/formatters/currency';
 import dateFormatter from 'utils/formatters/date';
 

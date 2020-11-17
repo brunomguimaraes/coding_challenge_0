@@ -1,7 +1,6 @@
 import React from 'react';
-
-import Routes from 'routes';
 import { Main } from 'views/App/style';
+import Routes from 'routes';
 
 function App() {
   return (

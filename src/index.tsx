@@ -5,4 +5,4 @@ import App from 'views/App';
 
 import 'index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default ReactDOM.render(<App />, document.getElementById('root'));

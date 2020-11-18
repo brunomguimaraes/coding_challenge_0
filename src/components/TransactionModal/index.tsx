@@ -24,6 +24,7 @@ const TransactionModal = ({ handleClose, show, data }: ModalProps) => {
         <ModalButton
           tabIndex={0}
           role="button"
+          data-testid="close-button"
           onClick={() => handleClose()}
           onKeyDown={() => handleClose()}
         >

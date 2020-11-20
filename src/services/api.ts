@@ -24,16 +24,12 @@ const instance = axios.create({
   headers,
 });
 
-export const fetchNextTransactions = ({ lastTransaction, limit }: ApiParams) => {
-  const url = `${baseURL}/programs/${progId}/transactions?start=${encodeURIComponent(
-    JSON.stringify(lastTransaction)
-  )}&limit=${limit}`;
-
-  return instance.get(url);
-};
-
-export const fetchTransactions = ({ limit }: ApiParams) => {
-  const url = `${baseURL}/programs/${progId}/transactions?limit=${limit}`;
+export const fetchTransactions = ({ lastTransaction, limit }: ApiParams) => {
+  const paginationUrl =
+    lastTransaction && lastTransaction.id
+      ? `start=${encodeURIComponent(JSON.stringify(lastTransaction))}&`
+      : ``;
+  const url = `${baseURL}/programs/${progId}/transactions?${paginationUrl}limit=${limit}`;
 
   return instance.get(url);
 };

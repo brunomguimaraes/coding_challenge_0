@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import TransactionsTable from 'components/TransactionsTable';
 import getRowsLimit from 'utils/viewHeight';
-import { fetchTransactions, fetchNextTransactions, LastTransaction } from 'services/api';
+import { fetchTransactions, LastTransaction } from 'services/api';
 
 import { Header, Error } from './style';
 
@@ -9,6 +9,11 @@ const emptyLastTransaction = {
   id: '',
   programIdDel: '',
   time: '',
+};
+
+export type TransactionData = {
+  transactions: Transaction[];
+  lastTransaction: LastTransaction;
 };
 
 export type Transaction = {
@@ -37,20 +42,29 @@ const Transactions = () => {
   const [isLoading, setLoading] = useState<boolean>(() => false);
   const [hasMoreRows, setHasMoreRows] = useState<boolean>(() => true);
   const [errorMessage, setErrorMessage] = useState<string>(() => '');
-  const [transactions, setTransactions] = useState<Transaction[]>(() => []);
-  const [lastTransaction, setLastTransaction] = useState<LastTransaction>(
-    () => emptyLastTransaction
-  );
-  const limit = getRowsLimit();
-  const observer: any = useRef();
+  const [transactionsData, setTransactionsData] = useState<TransactionData>(() => {
+    return {
+      transactions: [],
+      lastTransaction: emptyLastTransaction,
+    };
+  });
 
-  const handlePagination = () => {
+  const limit = getRowsLimit();
+  const intersectionObserverRef: any = useRef();
+
+  const fetchTransactionsData = () => {
     setLoading(true);
-    fetchNextTransactions({ lastTransaction, limit })
+    const { lastTransaction } = transactionsData;
+
+    fetchTransactions({ lastTransaction, limit })
       .then((res) => {
-        setTransactions((oldTransactions) => [...oldTransactions, ...res.data.items]);
         if (res.data.last !== lastTransaction) {
-          setLastTransaction(res.data.last);
+          setTransactionsData((oldTransactionsData) => {
+            return {
+              transactions: [...oldTransactionsData.transactions, ...res.data.items],
+              lastTransaction: res.data.last,
+            };
+          });
         } else {
           setHasMoreRows(false);
         }
@@ -66,43 +80,34 @@ const Transactions = () => {
   const lastRowElementRef = useCallback(
     (row) => {
       if (isLoading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
+      if (intersectionObserverRef.current) intersectionObserverRef.current.disconnect();
+      intersectionObserverRef.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMoreRows) {
-          handlePagination();
+          fetchTransactionsData();
         }
       });
-      if (row) observer.current.observe(row);
+      if (row) intersectionObserverRef.current.observe(row);
     },
     [isLoading, hasMoreRows]
   );
 
   useEffect(() => {
-    setLoading(true);
-    fetchTransactions({ limit })
-      .then((res) => {
-        setTransactions(res.data.items);
-        setLastTransaction(res.data.last);
-        setLoading(false);
-      })
-      .catch((error) => {
-        if (error) {
-          setErrorMessage('an error has occurred! Please contact technical support.');
-        }
-      });
+    fetchTransactionsData();
   }, []);
 
   return (
     <div>
       {errorMessage && <Error>{errorMessage}</Error>}
       <Header>Fidel API</Header>
-      <TransactionsTable
-        data-testid="transactions-table"
-        elementRef={lastRowElementRef}
-        transactions={transactions}
-        isLoading={isLoading}
-        limit={Number(limit)}
-      />
+      {transactionsData && (
+        <TransactionsTable
+          data-testid="transactions-table"
+          elementRef={lastRowElementRef}
+          transactions={transactionsData.transactions}
+          isLoading={isLoading}
+          limit={Number(limit)}
+        />
+      )}
     </div>
   );
 };

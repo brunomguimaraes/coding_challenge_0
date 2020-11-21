@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Transactions from 'views/Transactions';
 import * as api from 'services/api';
@@ -97,17 +97,21 @@ beforeEach(() => {
   window.IntersectionObserver = mockIntersectionObserver;
 });
 
-test('Render Properly', async () => {
-  jest.spyOn(api, 'fetchTransactions').mockResolvedValue({
-    data: { items: mockedApiResponse },
-    status: 200,
-    config: {},
-    statusText: 'sucess',
-    headers: {},
+test('Render properly with successful api call', async () => {
+  jest.spyOn(api, 'fetchTransactions').mockImplementation(async () => {
+    return {
+      data: { items: mockedApiResponse },
+      status: 200,
+      config: {},
+      statusText: 'sucess',
+      headers: {},
+    };
   });
   render(<Transactions />);
   const headerElement = screen.getByText(/Fidel API/i);
+  const skeletonRow = screen.getByTestId('0-skel-row');
 
+  expect(skeletonRow).toBeInTheDocument();
   expect(headerElement).toBeInTheDocument();
   expect(await screen.findByText('9/26/2017, 8:00:00 PM, (GMT-5)')).toBeInTheDocument();
   expect(await screen.findByText('9/26/2020, 8:00:00 PM, (GMT-5)')).toBeInTheDocument();
@@ -115,4 +119,22 @@ test('Render Properly', async () => {
   expect(await screen.findByText('R$48.78')).toBeInTheDocument();
   expect(await screen.findByText('•••• 4009')).toBeInTheDocument();
   expect(await screen.findByText('•••• 4019')).toBeInTheDocument();
+});
+
+test('Handle error from api call', async () => {
+  jest.spyOn(api, 'fetchTransactions').mockRejectedValue(async () => {
+    return {
+      data: {},
+      status: 500,
+      config: {},
+      statusText: 'error',
+      headers: {},
+    };
+  });
+  render(<Transactions />);
+  await waitFor(() => {
+    expect(
+      screen.getByText('an error has occurred! Please contact technical support.')
+    ).toBeInTheDocument();
+  });
 });

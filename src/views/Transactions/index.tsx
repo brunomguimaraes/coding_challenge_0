@@ -97,7 +97,7 @@ const Transactions = () => {
 
   return (
     <div>
-      {errorMessage && <Error>{errorMessage}</Error>}
+      {errorMessage && <Error data-testid="error-message">{errorMessage}</Error>}
       <Header>Fidel API</Header>
       {transactionsData && (
         <TransactionsTable

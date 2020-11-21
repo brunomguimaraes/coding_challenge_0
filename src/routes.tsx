@@ -1,15 +1,21 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Router } from 'react-router-dom';
 
 import Transactions from 'views/Transactions';
 import NotFound from 'views/NotFound';
 
+import { createBrowserHistory } from 'history';
+
+const customHistory = createBrowserHistory();
+
 const Routes = () => {
   return (
-    <Switch>
-      <Route exact component={Transactions} path="/" />
-      <Route component={NotFound} path="*" />
-    </Switch>
+    <Router history={customHistory}>
+      <Switch>
+        <Route exact component={Transactions} path="/" />
+        <Route component={NotFound} />
+      </Switch>
+    </Router>
   );
 };
 

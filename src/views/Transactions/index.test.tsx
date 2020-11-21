@@ -132,6 +132,11 @@ test('Handle error from api call', async () => {
     };
   });
   render(<Transactions />);
+
+  const skeletonRow = screen.getByTestId('0-skel-row');
+
+  expect(skeletonRow).toBeInTheDocument();
+
   await waitFor(() => {
     expect(
       screen.getByText('an error has occurred! Please contact technical support.')

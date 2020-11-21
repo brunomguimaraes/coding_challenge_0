@@ -7,7 +7,7 @@ import NotFound from 'views/NotFound';
 const Routes = () => {
   return (
     <BrowserRouter>
-      <Route component={Transactions} path="/" exact />
+      <Route component={Transactions} path="/" />
       <Route component={NotFound} />
     </BrowserRouter>
   );

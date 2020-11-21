@@ -13,7 +13,7 @@ const Routes = () => {
     <Router history={customHistory}>
       <Switch>
         <Route exact component={Transactions} path="/" />
-        <Route component={NotFound} path="*" />
+        <Route component={NotFound} />
       </Switch>
     </Router>
   );

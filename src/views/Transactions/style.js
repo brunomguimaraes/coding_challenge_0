@@ -3,10 +3,6 @@ import styleConstants from 'utils/constants/style';
 
 const { purple, errorColor, white } = styleConstants;
 
-export const Wrapper = styled.div`
-  margin-bottom: 64px;
-`;
-
 export const Error = styled.div`
   background-color: ${errorColor};
   color: ${white};
@@ -25,4 +21,4 @@ export const Header = styled.h1`
   color: ${purple};
 `;
 
-export default Wrapper;
+export default Header;

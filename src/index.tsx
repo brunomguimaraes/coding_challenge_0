@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 
 import App from 'views/App';
 
-import 'index.css';
+import { GlobalStyle } from 'globalStyle';
 
-export default ReactDOM.render(<App />, document.getElementById('root'));
+export default ReactDOM.render(
+  <>
+    <GlobalStyle />
+    <App />
+  </>,
+  document.getElementById('root')
+);

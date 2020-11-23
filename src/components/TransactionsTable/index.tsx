@@ -18,7 +18,7 @@ import {
 
 type ITransactionTable = {
   transactions: Transaction[];
-  elementRef: any;
+  lastRowElementRef: any;
   isLoading: boolean;
   limit: number;
 };
@@ -80,7 +80,12 @@ const emptyModalData = {
   postcode: '',
 };
 
-const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITransactionTable) => {
+const TransactionsTable = ({
+  transactions,
+  lastRowElementRef,
+  isLoading,
+  limit,
+}: ITransactionTable) => {
   const [isModalShown, showModal] = useState<boolean>(() => false);
   const [modalData, setModalData] = useState<TransactionDataSource>(() => emptyModalData);
   const dataSource = transactions.map((transaction) => {
@@ -125,7 +130,10 @@ const TransactionsTable = ({ transactions, elementRef, isLoading, limit }: ITran
         </thead>
         <tbody>
           {dataSource.map((data: TransactionDataSource, index: number) => (
-            <TableRow ref={dataSource.length === index + 1 ? elementRef : null} key={data.key}>
+            <TableRow
+              ref={dataSource.length === index + 1 ? lastRowElementRef : null}
+              key={data.key}
+            >
               <TableCell data-testid={`${data.key}-scheme-tid`}>
                 <PaymentIcon cardName={data.scheme} />
               </TableCell>

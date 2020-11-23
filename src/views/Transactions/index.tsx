@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import TransactionsTable from 'components/TransactionsTable';
-import getRowsLimit from 'utils/viewHeight';
+import getRowsLimit from 'views/Transactions/utils/viewHeight';
 import { fetchTransactions, LastTransaction } from 'services/api';
 
 import { Header, Error } from './style';
@@ -49,7 +49,7 @@ const Transactions = () => {
     };
   });
 
-  const limit = getRowsLimit();
+  const limit = getRowsLimit(47);
   const intersectionObserverRef: any = useRef();
 
   const fetchTransactionsData = () => {
@@ -77,19 +77,16 @@ const Transactions = () => {
       });
   };
 
-  const lastRowElementRef = useCallback(
-    (row) => {
-      if (isLoading) return;
-      if (intersectionObserverRef.current) intersectionObserverRef.current.disconnect();
-      intersectionObserverRef.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMoreRows) {
-          fetchTransactionsData();
-        }
-      });
-      if (row) intersectionObserverRef.current.observe(row);
-    },
-    [isLoading, hasMoreRows]
-  );
+  const lastRowElementRef = (row: any) => {
+    if (isLoading) return;
+    if (intersectionObserverRef.current) intersectionObserverRef.current.disconnect();
+    intersectionObserverRef.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasMoreRows) {
+        fetchTransactionsData();
+      }
+    });
+    if (row) intersectionObserverRef.current.observe(row);
+  };
 
   useEffect(() => {
     fetchTransactionsData();
@@ -102,7 +99,7 @@ const Transactions = () => {
       {transactionsData && (
         <TransactionsTable
           data-testid="transactions-table"
-          elementRef={lastRowElementRef}
+          lastRowElementRef={lastRowElementRef}
           transactions={transactionsData.transactions}
           isLoading={isLoading}
           limit={Number(limit)}

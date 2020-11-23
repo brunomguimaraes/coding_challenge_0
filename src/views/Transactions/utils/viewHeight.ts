@@ -1,7 +1,5 @@
-const ROW_HEIGHT = 47;
-
-export default function getRowsLimit() {
+export default function getRowsLimit(rowHeight: number) {
   const viewHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-  const rowsToBeShown = Math.ceil(viewHeight / ROW_HEIGHT) + 1;
+  const rowsToBeShown = Math.ceil(viewHeight / rowHeight) + 1;
   return rowsToBeShown.toString();
 }

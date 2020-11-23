@@ -108,11 +108,7 @@ test('Render properly with successful api call', async () => {
     };
   });
   render(<Transactions />);
-  const headerElement = screen.getByText(/Fidel API/i);
-  const skeletonRow = screen.getByTestId('0-skel-row');
 
-  expect(skeletonRow).toBeInTheDocument();
-  expect(headerElement).toBeInTheDocument();
   expect(await screen.findByText('9/26/2017, 8:00:00 PM, (GMT-5)')).toBeInTheDocument();
   expect(await screen.findByText('9/26/2020, 8:00:00 PM, (GMT-5)')).toBeInTheDocument();
   expect(await screen.findByText('£12.20')).toBeInTheDocument();

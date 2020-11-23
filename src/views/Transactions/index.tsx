@@ -80,11 +80,18 @@ const Transactions = () => {
   const lastRowElementRef = (row: any) => {
     if (isLoading) return;
     if (intersectionObserverRef.current) intersectionObserverRef.current.disconnect();
-    intersectionObserverRef.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && hasMoreRows) {
-        fetchTransactionsData();
+    intersectionObserverRef.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMoreRows) {
+          fetchTransactionsData();
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1.0,
       }
-    });
+    );
     if (row) intersectionObserverRef.current.observe(row);
   };
 

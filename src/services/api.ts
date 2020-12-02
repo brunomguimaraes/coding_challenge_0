@@ -11,12 +11,12 @@ export type LastTransaction = {
   time: string;
 };
 
-const secretKey = process.env.REACT_APP_FIDEL_API_SECRET_KEY;
-const baseURL = process.env.REACT_APP_FIDEL_API_STAGE_URL;
-const progId = process.env.REACT_APP_FIDEL_API_PROGRAM_ID;
+const secretKey = process.env.REACT_APP_CENSORED_NAME_API_SECRET_KEY;
+const baseURL = process.env.REACT_APP_CENSORED_NAME_API_STAGE_URL;
+const progId = process.env.REACT_APP_CENSORED_NAME_API_PROGRAM_ID;
 
 const headers = {
-  'fidel-key': `${secretKey}`,
+  'CENSORED_NAME-key': `${secretKey}`,
 };
 
 const instance = axios.create({

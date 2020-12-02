@@ -102,7 +102,7 @@ const Transactions = () => {
   return (
     <div>
       {errorMessage && <Error data-testid="error-message">{errorMessage}</Error>}
-      <Header>Fidel API</Header>
+      <Header>***CENSORED_NAME*** API</Header>
       {transactionsData && (
         <TransactionsTable
           data-testid="transactions-table"

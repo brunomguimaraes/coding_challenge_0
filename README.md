@@ -2,9 +2,6 @@
 I took the liberty of doing the techtest in another private repository, so that I could configure automated deployment and CI. As a result, you will not find my git flow in this repository.
 If it is in the interest of the reviewers, I can share the other repository to show all the commits and pull requests.
 
-## Live version:
-https://pedantic-joliot-45c220.netlify.app/
-
 ## Requirements
 - NodeJS v12.16.3
 
